@@ -120,7 +120,7 @@ function remove(text){
  * @returns {void}
  */
 function help(){
-  console.log('hello \n hello x\n quit \n')
+  console.log('hello \n hello x\n quit \n list \n add x \n remove \n remove x\n')
 }
 
 /**
