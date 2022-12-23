@@ -44,6 +44,10 @@ function onDataReceived(text) {
     remove(text);
   } else if (text.trim().startsWith("edit")) {
     edit(text);
+  }else if (text.trim().startsWith("check")) {
+    check(text);
+  }else if (text.trim().startsWith("uncheck")) {
+    uncheck(text);
   }else if (text === "help\n") {
     help();
   } else {
@@ -142,6 +146,31 @@ function edit(text) {
     tasks[tasks.length - 1].task=text.trim().split(" ")[1]
   } else{
     tasks[parseInt(text.trim().split(" ")[1])-1].task=text.trim().split(" ")[2]
+  }
+}
+/**
+ * check done items
+ *
+ * @returns {void}
+ */
+function check(text) {
+  if (text.trim() === "check") {
+    console.log("error");
+  } else {
+    tasks[parseInt(text.trim().split(" ")[1])-1].done=true
+  }
+}
+
+/**
+ * check done items
+ *
+ * @returns {void}
+ */
+function uncheck(text) {
+  if (text.trim() === "uncheck") {
+    console.log("error");
+  } else {
+    tasks[parseInt(text.trim().split(" ")[1])-1].done=false
   }
 }
 
