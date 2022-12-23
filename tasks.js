@@ -44,11 +44,11 @@ function onDataReceived(text) {
     remove(text);
   } else if (text.trim().startsWith("edit")) {
     edit(text);
-  }else if (text.trim().startsWith("check")) {
+  } else if (text.trim().startsWith("check")) {
     check(text);
-  }else if (text.trim().startsWith("uncheck")) {
+  } else if (text.trim().startsWith("uncheck")) {
     uncheck(text);
-  }else if (text === "help\n") {
+  } else if (text === "help\n") {
     help();
   } else {
     unknownCommand(text);
@@ -75,15 +75,18 @@ function hello(text) {
   console.log(text.trim() + "!");
 }
 
-let tasks = [{
-  'id':0,
-  'task': "Study",
-  'done': true
-}, {
-  'id':1,
-  'task': "buy fruits",
-  'done': false
-}];
+let tasks = [
+  {
+    id: 0,
+    task: "Study",
+    done: true,
+  },
+  {
+    id: 1,
+    task: "buy fruits",
+    done: false,
+  },
+];
 /**
  * display tasks list
  *
@@ -91,12 +94,11 @@ let tasks = [{
  */
 function list() {
   tasks.map((todo, index) => {
-    if (todo.done === true){
-      console.log(index+1,`[✓]`,todo.task);
+    if (todo.done === true) {
+      console.log(index + 1, `[✓]`, todo.task);
     } else {
-      console.log(index+1,`[ ]`,todo.task);
+      console.log(index + 1, `[ ]`, todo.task);
     }
-    
   });
 }
 
@@ -110,10 +112,10 @@ function add(task) {
     console.log("error");
   } else {
     tasks.push({
-      'id':tasks.length,
-      'task':task.trim().slice(3).trim(),
-      'done': false
-    })
+      id: tasks.length,
+      task: task.trim().slice(3).trim(),
+      done: false,
+    });
   }
 }
 
@@ -126,7 +128,10 @@ function remove(text) {
   if (text.trim() === "remove") {
     tasks.splice(-1, 1);
   } else {
-    if (parseInt(text.trim().split(" ")[1]) < tasks.length && parseInt(text.trim().split(" ")[1]) > 0) {
+    if (
+      parseInt(text.trim().split(" ")[1]) < tasks.length &&
+      parseInt(text.trim().split(" ")[1]) > 0
+    ) {
       tasks.splice(parseInt(text.trim().split(" ")[1]) - 1, 1);
     } else {
       console.log("you entered a number that does not exist");
@@ -142,10 +147,10 @@ function remove(text) {
 function edit(text) {
   if (text.trim().split(" ").length === 1) {
     console.log("error");
-  } else if (text.trim().split(" ").length === 2){
-    tasks[tasks.length - 1].task=text.trim().split(" ")[1]
-  } else{
-    tasks[parseInt(text.trim().split(" ")[1])-1].task=text.trim().split(" ")[2]
+  } else if (isNaN(parseInt(text.trim().split(" ")[1]))) {
+    tasks[tasks.length - 1].task = text.trim().slice(5);
+  } else {
+    tasks[parseInt(text.trim().split(" ")[1]) - 1].task = text.trim().slice(7);
   }
 }
 /**
@@ -157,7 +162,7 @@ function check(text) {
   if (text.trim() === "check") {
     console.log("error");
   } else {
-    tasks[parseInt(text.trim().split(" ")[1])-1].done=true
+    tasks[parseInt(text.trim().split(" ")[1]) - 1].done = true;
   }
 }
 
@@ -170,10 +175,9 @@ function uncheck(text) {
   if (text.trim() === "uncheck") {
     console.log("error");
   } else {
-    tasks[parseInt(text.trim().split(" ")[1])-1].done=false
+    tasks[parseInt(text.trim().split(" ")[1]) - 1].done = false;
   }
 }
-
 
 /**
  * Help
@@ -182,7 +186,7 @@ function uncheck(text) {
  */
 function help() {
   console.log(
-    "hello \n hello x\n quit \n list \n add x \n remove \n remove x\n"
+    "hello \n hello x\n quit \n list \n add x \n remove \n remove x\n edit new text \n edit num new text \n check x \n uncheck x \n"
   );
 }
 
