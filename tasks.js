@@ -1,3 +1,9 @@
+let tasks = [];
+let fake_db = process.argv[2]
+// if (fake_db == null){
+//   fake_db="database.json"
+// }
+fake_db == null ? fake_db="database.json":fake_db;
 /**
  * Starts the application
  * This is the function that is run when the app starts
@@ -14,6 +20,29 @@ function startApp(name) {
   process.stdin.on("data", onDataReceived);
   console.log(`Welcome to ${name}'s application!`);
   console.log("--------------------");
+  readData();
+}
+
+// file system module to perform file operations
+const fs = require("fs");
+
+
+function saveData() {
+  let data = JSON.stringify(tasks);
+  fs.writeFileSync(fake_db, data, (err) => {
+    if (err) throw err;
+    console.log("Data written to file");
+  });
+}
+function readData() {
+  fs.readFile(fake_db, (data) => {
+    try{
+    let tasks = JSON.parse(data);
+    console.log(tasks);
+  }catch(error){
+    console.error("Empty database");
+  }
+});
 }
 
 /**
@@ -33,6 +62,7 @@ function startApp(name) {
  */
 function onDataReceived(text) {
   if (text === "quit\n" || text === "exit\n") {
+    saveData();
     quit();
   } else if (text.trim().split(" ")[0] === "hello") {
     hello(text);
@@ -75,18 +105,6 @@ function hello(text) {
   console.log(text.trim() + "!");
 }
 
-let tasks = [
-  {
-    id: 0,
-    task: "Study",
-    done: true,
-  },
-  {
-    id: 1,
-    task: "buy fruits",
-    done: false,
-  },
-];
 /**
  * display tasks list
  *
