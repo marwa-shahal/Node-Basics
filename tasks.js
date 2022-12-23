@@ -34,11 +34,11 @@ function startApp(name){
  * @returns {void}
  */
 function onDataReceived(text) {
-  if (text === 'quit\n' || text === 'exit\n') {
+  if (text === 'quit\n'|| text==='exit\n') {
     quit();
   }
-  else if(text === 'hello\n'){
-    hello();
+  else if(text.trim().split(" ")[0] === 'hello'){
+    hello(text);
   }
   else if(text === 'help\n'){
     help();
@@ -66,10 +66,18 @@ function unknownCommand(c){
  *
  * @returns {void}
  */
-function hello(){
-  console.log('hello!')
+function hello(text){
+  console.log(text.trim() + "!")
 }
 
+/**
+ * Help
+ *
+ * @returns {void}
+ */
+function quit(){
+  console.log('hello \n quit \n')
+}
 
 /**
  * Exits the application
@@ -81,14 +89,6 @@ function quit(){
   process.exit();
 }
 
-/**
- * Help
- *
- * @returns {void}
- */
-function quit(){
-  console.log('hello \n quit \n')
-}
 
 // The following line starts the application
 startApp("Marwa Al Shahal")
