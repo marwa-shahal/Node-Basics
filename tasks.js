@@ -76,7 +76,7 @@ function hello(text){
  * @returns {void}
  */
 function quit(){
-  console.log('hello \n quit \n')
+  console.log('hello \n hello x\n quit \n')
 }
 
 /**
