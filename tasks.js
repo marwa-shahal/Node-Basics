@@ -71,15 +71,28 @@ function hello(text) {
   console.log(text.trim() + "!");
 }
 
-let tasks = ["do js exercise", "study git"];
+let tasks = [{
+  'id':0,
+  'task': "Study",
+  'done': true
+}, {
+  'id':1,
+  'task': "buy fruits",
+  'done': false
+}];
 /**
  * display tasks list
  *
  * @returns {void}
  */
 function list() {
-  tasks.map((task, index) => {
-    console.log(index + 1, task);
+  tasks.map((todo, index) => {
+    if (todo.done === true){
+      console.log(index+1,`[✓]`,todo.task);
+    } else {
+      console.log(index+1,`[ ]`,todo.task);
+    }
+    
   });
 }
 
@@ -92,7 +105,11 @@ function add(task) {
   if (task.trim() === "add") {
     console.log("error");
   } else {
-    tasks.push(task.trim().slice(3).trim());
+    tasks.push({
+      'id':tasks.length,
+      'task':task.trim().slice(3).trim(),
+      'done': false
+    })
   }
 }
 
@@ -122,9 +139,9 @@ function edit(text) {
   if (text.trim().split(" ").length === 1) {
     console.log("error");
   } else if (text.trim().split(" ").length === 2){
-    tasks[tasks.length - 1]=text.trim().split(" ")[1]
+    tasks[tasks.length - 1].task=text.trim().split(" ")[1]
   } else{
-    tasks[parseInt(text.trim().split(" ")[1])-1]=text.trim().split(" ")[2]
+    tasks[parseInt(text.trim().split(" ")[1])-1].task=text.trim().split(" ")[2]
   }
 }
 
