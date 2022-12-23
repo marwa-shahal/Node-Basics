@@ -41,6 +41,10 @@ function onDataReceived(text) {
     hello(text);
   }else if(text === 'list\n'){
     list();
+  }else if(text === 'add\n'){
+    console.log("error");
+  }else if(text.trim().split(" ")[0] === 'add'){
+    add(text.trim().slice(3,));
   }
   else if(text === 'help\n'){
     help();
@@ -73,7 +77,7 @@ function hello(text){
 }
 let tasks = ["do js exercise","study git"]
 /**
- * Says hello
+ * display tasks list
  *
  * @returns {void}
  */
@@ -81,6 +85,15 @@ function list(text){
   tasks.map((task,index)=>{
     console.log(index+1,task)
   })
+}
+
+/**
+ * add item to tasks arr
+ *
+ * @returns {void}
+ */
+function add(task){
+  tasks.push(task.trim())
 }
 /**
  * Help
