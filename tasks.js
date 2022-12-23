@@ -42,7 +42,9 @@ function onDataReceived(text) {
     add(text);
   } else if (text.trim().startsWith("remove")) {
     remove(text);
-  } else if (text === "help\n") {
+  } else if (text.trim().startsWith("edit")) {
+    edit(text);
+  }else if (text === "help\n") {
     help();
   } else {
     unknownCommand(text);
@@ -110,6 +112,22 @@ function remove(text) {
     }
   }
 }
+
+/**
+ * edit item from arr
+ *
+ * @returns {void}
+ */
+function edit(text) {
+  if (text.trim().split(" ").length === 1) {
+    console.log("error");
+  } else if (text.trim().split(" ").length === 2){
+    tasks[tasks.length - 1]=text.trim().split(" ")[1]
+  } else{
+    tasks[parseInt(text.trim().split(" ")[1])-1]=text.trim().split(" ")[2]
+  }
+}
+
 
 /**
  * Help
