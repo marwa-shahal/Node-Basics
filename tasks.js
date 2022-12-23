@@ -41,10 +41,10 @@ function onDataReceived(text) {
     hello(text);
   }else if(text === 'list\n'){
     list();
-  }else if(text === 'add\n'){
-    console.log("error");
-  }else if(text.trim().split(" ")[0] === 'add'){
-    add(text.trim().slice(3,));
+  }else if(text.trim().startsWith('add')){
+    add(text);
+  }else if(text.trim().startsWith('remove')){
+    remove(text);
   }
   else if(text === 'help\n'){
     help();
@@ -75,13 +75,14 @@ function unknownCommand(c){
 function hello(text){
   console.log(text.trim() + "!")
 }
+
 let tasks = ["do js exercise","study git"]
 /**
  * display tasks list
  *
  * @returns {void}
  */
-function list(text){
+function list(){
   tasks.map((task,index)=>{
     console.log(index+1,task)
   })
@@ -93,14 +94,32 @@ function list(text){
  * @returns {void}
  */
 function add(task){
-  tasks.push(task.trim())
+  if (task.trim()==="add"){
+    console.log("error")
+  }else{
+    tasks.push(task.trim().slice(3,).trim())
+  }
 }
+
+/**
+ * remove item from arr
+ *
+ * @returns {void}
+ */
+function remove(text){
+  if (text.trim() === "remove"){
+    tasks.splice(-1,1)
+  } else {
+    tasks.splice(parseInt(text.trim().split(" ")[1]) - 1 , 1)
+  }
+}
+
 /**
  * Help
  *
  * @returns {void}
  */
-function quit(){
+function help(){
   console.log('hello \n hello x\n quit \n')
 }
 
