@@ -39,6 +39,8 @@ function onDataReceived(text) {
   }
   else if(text.trim().split(" ")[0] === 'hello'){
     hello(text);
+  }else if(text === 'list\n'){
+    list();
   }
   else if(text === 'help\n'){
     help();
@@ -69,7 +71,17 @@ function unknownCommand(c){
 function hello(text){
   console.log(text.trim() + "!")
 }
-
+let tasks = ["do js exercise","study git"]
+/**
+ * Says hello
+ *
+ * @returns {void}
+ */
+function list(text){
+  tasks.map((task,index)=>{
+    console.log(index+1,task)
+  })
+}
 /**
  * Help
  *
